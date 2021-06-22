@@ -40,7 +40,7 @@ class Weapon
 	{
 		this.stage.bullets.add(this.createBullet());
 		this.timer = 0;
-		FlxG.camera.shake(0.005, 0.2);
+		FlxG.camera.shake(0.003, 0.2);
 	}
 
 	private function createBullet():Bullet
@@ -48,7 +48,7 @@ class Weapon
 		var bullet:Bullet = new Bullet();
 		bullet.speed = !character.right ? -bullet.speed : bullet.speed;
 
-		bullet.setPosition(this.character.getPosition().x, this.character.getPosition().y + 5);
+		bullet.setPosition(this.character.getPosition().x, this.character.getPosition().y + 5 + Std.random(5));
 
 		return bullet;
 	}

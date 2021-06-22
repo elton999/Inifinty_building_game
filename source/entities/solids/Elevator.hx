@@ -9,7 +9,7 @@ import lime.math.Vector2;
 
 class Elevator extends FlxSprite
 {
-	public function new(x:Float = 48, y:Float = 8)
+	public function new(x:Float = 32, y:Float = 8)
 	{
 		super(x, y);
 		makeGraphic(Std.int(x), Std.int(y), FlxColor.BLUE);

@@ -25,7 +25,7 @@ class Floor
 
 	public function new()
 	{
-		this.firstFloor = [4, 0, 0, 1];
+		this.firstFloor = [4, 0, 0, 0, 1];
 	}
 
 	public var firstFloor:Array<Int>;
@@ -42,8 +42,8 @@ class Floor
 		this.AllFloors.push(levels);
 		this.setPartOfFloor(offsetX, offsetY, AssetPaths.Wall__json);
 
-		for (i in 0...4)
-			this.setPartOfFloor(offsetX + 24 + (i * 80), offsetY, level[levels[i]]);
+		for (i in 0...5)
+			this.setPartOfFloor(offsetX + 24 + (i * 64), offsetY, level[levels[i]]);
 
 		this.setPartOfFloor(offsetX + 24 + (4 * 80), offsetY, AssetPaths.Wall__json);
 	}
@@ -67,7 +67,7 @@ class Floor
 		var nextLevel:Array<Int> = new Array<Int>();
 		var canChangeInRoom:Array<Int> = new Array<Int>();
 
-		for (i in 0...4)
+		for (i in 0...5)
 		{
 			if (this.AllFloors[this.state.currentLevel][i] == 4)
 				nextLevel.push(3);

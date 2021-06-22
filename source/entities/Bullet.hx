@@ -5,7 +5,7 @@ import flixel.util.FlxColor;
 
 class Bullet extends FlxSprite
 {
-	public function new(x:Float = 10, y:Float = 10)
+	public function new(x:Float = 5, y:Float = 5)
 	{
 		super(x, y);
 		makeGraphic(Std.int(x), Std.int(y), FlxColor.BLUE);

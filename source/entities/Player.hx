@@ -4,6 +4,7 @@ import entities.Weapon;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
+import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 
 class Player extends FlxSprite
@@ -32,6 +33,7 @@ class Player extends FlxSprite
 			this.move();
 			this.jump();
 			this._weapon.update(elapsed);
+			this.deformeBody();
 			super.update(elapsed);
 			this.checkCurrentLevel();
 		}
@@ -121,6 +123,39 @@ class Player extends FlxSprite
 	private function isGrounded():Bool
 	{
 		return this.isTouching(FlxObject.FLOOR);
+	}
+
+	private var lastframeIsOnGround = false;
+
+	private function deformeBody()
+	{
+		if (lastframeIsOnGround && !this.isGrounded())
+			this.splash();
+		if (!lastframeIsOnGround && this.isGrounded())
+			this.smash();
+		lastframeIsOnGround = this.isGrounded();
+	}
+
+	private function splash()
+	{
+		FlxTween.tween(this, {"scale.x": 0.8, "scale.y": 1.2}, 0.1, {
+			onComplete: function(_)
+			{
+				FlxTween.tween(this, {"scale.x": 1, "scale.y": 1}, 0.1);
+			},
+			type: ONESHOT
+		});
+	}
+
+	private function smash()
+	{
+		FlxTween.tween(this, {"scale.x": 1.2, "scale.y": 0.8}, 0.15, {
+			onComplete: function(_)
+			{
+				FlxTween.tween(this, {"scale.x": 1, "scale.y": 1}, 0.1);
+			},
+			type: ONESHOT
+		});
 	}
 
 	// end Jump
