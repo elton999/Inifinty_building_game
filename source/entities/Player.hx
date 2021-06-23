@@ -4,8 +4,10 @@ import entities.Weapon;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
+import flixel.math.FlxPoint;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
+import openfl.display.Sprite;
 
 class Player extends FlxSprite
 {
@@ -17,12 +19,16 @@ class Player extends FlxSprite
 	{
 		super(x, y);
 		makeGraphic(Std.int(x), Std.int(y), FlxColor.RED);
+		loadGraphic(AssetPaths.player__png, true, 64, 64);
+		offset = FlxPoint.get(28, 23);
 		setPosition(60, 190);
 		setSize(10, 25);
 		this.stage = state;
 
 		_weapon = new Weapon(this.stage);
 		_weapon.character = this;
+
+		this.setAnimation();
 	}
 
 	public override function update(elapsed:Float)
@@ -34,6 +40,7 @@ class Player extends FlxSprite
 			this.jump();
 			this._weapon.update(elapsed);
 			this.deformeBody();
+			this.playAnimation();
 			super.update(elapsed);
 			this.checkCurrentLevel();
 		}
@@ -71,12 +78,14 @@ class Player extends FlxSprite
 		{
 			speed = this._speed;
 			right = true;
+			this.flipX = false;
 		}
 
 		if (this.CLeft)
 		{
 			speed = -this._speed;
 			right = false;
+			this.flipX = true;
 		}
 
 		velocity.set(speed, this._gravity);
@@ -130,13 +139,13 @@ class Player extends FlxSprite
 	private function deformeBody()
 	{
 		if (lastframeIsOnGround && !this.isGrounded())
-			this.splash();
+			this.stretch();
 		if (!lastframeIsOnGround && this.isGrounded())
 			this.smash();
 		lastframeIsOnGround = this.isGrounded();
 	}
 
-	private function splash()
+	private function stretch()
 	{
 		FlxTween.tween(this, {"scale.x": 0.8, "scale.y": 1.2}, 0.1, {
 			onComplete: function(_)
@@ -159,4 +168,23 @@ class Player extends FlxSprite
 	}
 
 	// end Jump
+	// animation
+	private function playAnimation():Void
+	{
+		if (this.velocity.x != 0 && this.isGrounded())
+			this.animation.play("run");
+		else if (!this.isGrounded())
+			this.animation.play("jump");
+		else
+			this.animation.play("idle");
+	}
+
+	private function setAnimation():Void
+	{
+		animation.add("idle", [0, 1, 2, 3, 4], 10);
+		animation.add("run", [9, 10, 11, 12, 13, 14, 15], 10);
+		animation.add("jump", [16], 10);
+	}
+
+	// and animation
 }

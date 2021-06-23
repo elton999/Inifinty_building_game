@@ -7,6 +7,7 @@ import flixel.FlxG;
 import flixel.FlxState;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.tile.FlxTilemap;
+import flixel.tile.FlxTilemapBuffer;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import scene.Floor;
@@ -16,6 +17,7 @@ class PlayState extends FlxState
 	public var Player:Player;
 
 	private var floor:FlxTypedGroup<FlxTilemap>;
+	private var tilemap:FlxTypedGroup<FlxTilemap>;
 
 	public var floorManagement:Floor;
 
@@ -33,8 +35,10 @@ class PlayState extends FlxState
 		floorManagement.state = this;
 		floorManagement.createFirstFloor();
 		this.floor = floorManagement.floor;
+		this.tilemap = floorManagement.tilemap;
 		this.elevators = floorManagement.elevators;
 		add(this.floor);
+		add(this.tilemap);
 		add(this.elevators);
 
 		this.Player = new Player(this);
@@ -46,6 +50,7 @@ class PlayState extends FlxState
 		// FlxG.camera.follow(this.Player, PLATFORMER, 1);
 
 		bgColor = FlxColor.GRAY;
+		this.moveBounds();
 	}
 
 	override public function update(elapsed:Float)

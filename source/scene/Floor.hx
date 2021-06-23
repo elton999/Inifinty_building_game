@@ -1,6 +1,7 @@
 package scene;
 
 import entities.solids.Elevator;
+import flixel.FlxObject;
 import flixel.addons.editors.ogmo.FlxOgmo3Loader;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.tile.FlxTilemap;
@@ -9,6 +10,7 @@ import lime.math.Vector2;
 class Floor
 {
 	public var floor:FlxTypedGroup<FlxTilemap>;
+	public var tilemap:FlxTypedGroup<FlxTilemap>;
 	public var elevators:FlxTypedGroup<Elevator> = new FlxTypedGroup<Elevator>();
 	public var AllFloors:Array<Array<Int>> = new Array<Array<Int>>();
 	public var state:PlayState;
@@ -33,6 +35,7 @@ class Floor
 	public function createFirstFloor()
 	{
 		this.floor = new FlxTypedGroup<FlxTilemap>();
+		this.tilemap = new FlxTypedGroup<FlxTilemap>();
 		this.create(this.firstFloor, 0);
 		this.createNextFloor();
 	}
@@ -40,21 +43,27 @@ class Floor
 	public function create(levels:Array<Int>, offsetY:Float):Void
 	{
 		this.AllFloors.push(levels);
-		this.setPartOfFloor(offsetX, offsetY, AssetPaths.Wall__json);
+		this.setPartOfFloor(offsetX, offsetY, AssetPaths.Wall_l__json);
 
 		for (i in 0...5)
 			this.setPartOfFloor(offsetX + 24 + (i * 64), offsetY, level[levels[i]]);
 
-		this.setPartOfFloor(offsetX + 24 + (4 * 80), offsetY, AssetPaths.Wall__json);
+		this.setPartOfFloor(offsetX + 24 + (4 * 80), offsetY, AssetPaths.Wall_r__json);
 	}
 
 	private function setPartOfFloor(x:Float, y:Float, pathPartOfLevel:String):Void
 	{
+		this.floor.add(this.seTtileMap(x, y, "collision", pathPartOfLevel));
+		this.setEntities(x, y, pathPartOfLevel);
+		this.tilemap.add(this.seTtileMap(x, y, "texture", pathPartOfLevel));
+	}
+
+	private function seTtileMap(x:Float, y:Float, layer:String, pathPartOfLevel:String):FlxTilemap
+	{
 		var map:FlxOgmo3Loader = new FlxOgmo3Loader(AssetPaths.TileSet__ogmo, pathPartOfLevel);
-		var collisions:FlxTilemap = map.loadTilemap(AssetPaths.collision_tilemap__png, "collision");
+		var collisions:FlxTilemap = map.loadTilemap(AssetPaths.collision_tilemap__png, layer);
 		collisions.setPosition(x, y);
-		this.floor.add(collisions);
-		this.setEntities(x, y, map);
+		return collisions;
 	}
 
 	public function createNextFloor():Void
@@ -90,8 +99,9 @@ class Floor
 		return nextLevel;
 	}
 
-	private function setEntities(x:Float, y:Float, map:FlxOgmo3Loader):Void
+	private function setEntities(x:Float, y:Float, pathPartOfLevel:String):Void
 	{
+		var map:FlxOgmo3Loader = new FlxOgmo3Loader(AssetPaths.TileSet__ogmo, pathPartOfLevel);
 		map.loadEntities(function(entity:EntityData)
 		{
 			if (entity.name == "elevator")
