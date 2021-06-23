@@ -43,6 +43,7 @@ class PlayState extends FlxState
 
 		this.Player = new Player(this);
 		add(this.Player);
+		add(this.Player.arms);
 
 		this.bullets = new FlxTypedGroup<Bullet>();
 		add(this.bullets);

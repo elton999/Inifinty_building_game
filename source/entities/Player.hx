@@ -24,12 +24,19 @@ class Player extends FlxSprite
 		setPosition(60, 190);
 		setSize(10, 25);
 		this.stage = state;
+		this.stage.add(this.light);
+
+		arms.player = this;
 
 		_weapon = new Weapon(this.stage);
 		_weapon.character = this;
 
 		this.setAnimation();
 	}
+
+	private var light:Light = new Light();
+
+	public var arms:PlayerArms = new PlayerArms();
 
 	public override function update(elapsed:Float)
 	{
@@ -89,6 +96,8 @@ class Player extends FlxSprite
 		}
 
 		velocity.set(speed, this._gravity);
+
+		light.setPosition(x - 200, y - 200);
 	}
 
 	// Jump
@@ -129,9 +138,12 @@ class Player extends FlxSprite
 		return this.JumpPressedForce < this.JumpMaxForce;
 	}
 
-	private function isGrounded():Bool
+	public var grounded:Bool = false;
+
+	public function isGrounded():Bool
 	{
-		return this.isTouching(FlxObject.FLOOR);
+		grounded = this.isTouching(FlxObject.FLOOR);
+		return grounded;
 	}
 
 	private var lastframeIsOnGround = false;
@@ -143,6 +155,8 @@ class Player extends FlxSprite
 		if (!lastframeIsOnGround && this.isGrounded())
 			this.smash();
 		lastframeIsOnGround = this.isGrounded();
+
+		offset.y = 23 - ((64 - 64 * scale.y) / 2);
 	}
 
 	private function stretch()
@@ -158,7 +172,7 @@ class Player extends FlxSprite
 
 	private function smash()
 	{
-		FlxTween.tween(this, {"scale.x": 1.2, "scale.y": 0.8}, 0.15, {
+		FlxTween.tween(this, {"scale.x": 1.2, "scale.y": 0.9}, 0.15, {
 			onComplete: function(_)
 			{
 				FlxTween.tween(this, {"scale.x": 1, "scale.y": 1}, 0.1);
@@ -172,11 +186,20 @@ class Player extends FlxSprite
 	private function playAnimation():Void
 	{
 		if (this.velocity.x != 0 && this.isGrounded())
+		{
 			this.animation.play("run");
+			this.arms.animation.play("run");
+		}
 		else if (!this.isGrounded())
+		{
 			this.animation.play("jump");
+			this.arms.animation.play("jump");
+		}
 		else
+		{
 			this.animation.play("idle");
+			this.arms.animation.play("idle");
+		}
 	}
 
 	private function setAnimation():Void
