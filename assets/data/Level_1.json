@@ -14,7 +14,10 @@
       "gridCellHeight": 8,
       "gridCellsX": 8,
       "gridCellsY": 30,
-      "entities": []
+      "entities": [
+        {"name": "enemy", "id": 0, "_eid": "50600885", "x": 48, "y": 192, "originX": 0, "originY": 0},
+        {"name": "enemy", "id": 1, "_eid": "50600885", "x": 16, "y": 72, "originX": 0, "originY": 0}
+      ]
     },
     {
       "name": "environments",

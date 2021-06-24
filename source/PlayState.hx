@@ -1,6 +1,7 @@
 package;
 
 import entities.actors.Bullet;
+import entities.actors.Enemy;
 import entities.actors.Player;
 import entities.solids.Elevator;
 import flixel.FlxBasic;
@@ -27,6 +28,7 @@ class PlayState extends FlxState
 	public var bullets:FlxTypedGroup<Bullet>;
 	public var environments:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
 	public var elevators:FlxTypedGroup<Elevator>;
+	public var enemies:FlxTypedGroup<Enemy> = new FlxTypedGroup<Enemy>();
 
 	public var isChangingFloor:Bool = false;
 	public var currentLevel:Int = 0;
@@ -45,6 +47,7 @@ class PlayState extends FlxState
 		add(this.tilemap);
 		add(environments);
 		add(this.elevators);
+		add(this.enemies);
 
 		this.Player = new Player(this);
 		add(this.Player);
@@ -64,9 +67,17 @@ class PlayState extends FlxState
 		super.update(elapsed);
 		FlxG.collide(this.Player, this.elevators);
 		FlxG.collide(this.Player, floor);
+		FlxG.collide(this.enemies, floor);
+		FlxG.collide(this.enemies, this.enemies);
 		FlxG.collide(this.bullets, floor, function(bullet:Bullet, floor:FlxTilemap)
 		{
 			bullet.exists = false;
+		});
+
+		FlxG.collide(this.bullets, this.enemies, function(bullet:Bullet, enemy:Enemy)
+		{
+			bullet.exists = false;
+			enemy.exists = false;
 		});
 	}
 

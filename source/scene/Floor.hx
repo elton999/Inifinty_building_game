@@ -1,5 +1,6 @@
 package scene;
 
+import entities.actors.Enemy;
 import entities.solids.Elevator;
 import flixel.FlxBasic;
 import flixel.FlxObject;
@@ -129,6 +130,13 @@ class Floor
 
 				elevator.stage = this.state;
 				elevators.add(elevator);
+			}
+			if (entity.name == "enemy" && Std.random(2) == 0)
+			{
+				var enemy = new Enemy();
+				enemy.setPosition(entity.x + x, entity.y + y);
+				enemy.stage = this.state;
+				this.state.enemies.add(enemy);
 			}
 		}, "entities");
 	}
