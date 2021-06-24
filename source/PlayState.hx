@@ -8,6 +8,8 @@ import flixel.FlxBasic;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.effects.particles.FlxEmitter;
+import flixel.effects.particles.FlxParticle;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxGroup;
 import flixel.tile.FlxTilemap;
@@ -30,7 +32,8 @@ class PlayState extends FlxState
 	public var elevators:FlxTypedGroup<Elevator>;
 	public var enemies:FlxTypedGroup<Enemy> = new FlxTypedGroup<Enemy>();
 
-	public var isChangingFloor:Bool = false;
+	public var emitters:FlxTypedGroup<FlxEmitter> = new FlxTypedGroup<FlxEmitter>();
+
 	public var currentLevel:Int = 0;
 
 	public override function create()
@@ -48,6 +51,7 @@ class PlayState extends FlxState
 		add(environments);
 		add(this.elevators);
 		add(this.enemies);
+		add(this.emitters);
 
 		this.Player = new Player(this);
 		add(this.Player);
@@ -64,7 +68,24 @@ class PlayState extends FlxState
 
 	override public function update(elapsed:Float)
 	{
-		super.update(elapsed);
+		if (canUpdate())
+		{
+			super.update(elapsed);
+		}
+		if (isFreazeEfx)
+		{
+			timerFreaze += elapsed;
+			if (timerFreaze >= maxTimeFreaze)
+				isFreazeEfx = false;
+		}
+		else
+			timerFreaze = 0;
+
+		this.UpdateCollision();
+	}
+
+	public function UpdateCollision()
+	{
 		FlxG.collide(this.Player, this.elevators);
 		FlxG.collide(this.Player, floor);
 		FlxG.collide(this.enemies, floor);
@@ -74,16 +95,30 @@ class PlayState extends FlxState
 			bullet.exists = false;
 		});
 
+		FlxG.collide(this.emitters, floor);
+
 		FlxG.collide(this.bullets, this.enemies, function(bullet:Bullet, enemy:Enemy)
 		{
 			bullet.exists = false;
 			enemy.exists = false;
+			isFreazeEfx = true;
+			enemy.bleed(bullet.x, bullet.y);
 		});
+	}
+
+	public var isChangingFloor:Bool = false;
+	public var isFreazeEfx:Bool = false;
+	public var timerFreaze:Float = 0;
+	public var maxTimeFreaze:Float = 0.1;
+
+	public function canUpdate():Bool
+	{
+		return !isChangingFloor && !isFreazeEfx;
 	}
 
 	public function goTo(ScrollToY:Float):Void
 	{
-		FlxTween.tween(FlxG.camera.scroll, {x: FlxG.camera.scroll.x, y: FlxG.camera.scroll.y - ScrollToY}, 0.5, {
+		FlxTween.tween(FlxG.camera.scroll, {x: FlxG.camera.scroll.x, y: FlxG.camera.scroll.y - ScrollToY}, 0.3, {
 			onComplete: function(_)
 			{
 				this.isChangingFloor = false;

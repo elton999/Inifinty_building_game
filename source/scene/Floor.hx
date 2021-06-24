@@ -131,7 +131,7 @@ class Floor
 				elevator.stage = this.state;
 				elevators.add(elevator);
 			}
-			if (entity.name == "enemy" && Std.random(2) == 0)
+			if (entity.name == "enemy")
 			{
 				var enemy = new Enemy();
 				enemy.setPosition(entity.x + x, entity.y + y);

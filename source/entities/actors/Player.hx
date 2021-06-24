@@ -4,6 +4,8 @@ import entities.Weapon;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
+import flixel.effects.particles.FlxEmitter;
+import flixel.effects.particles.FlxParticle;
 import flixel.math.FlxPoint;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
@@ -155,10 +157,36 @@ class Player extends FlxSprite
 		if (lastframeIsOnGround && !this.isGrounded())
 			this.stretch();
 		if (!lastframeIsOnGround && this.isGrounded())
+		{
 			this.smash();
+			this.smoke();
+		}
 		lastframeIsOnGround = this.isGrounded();
 
 		offset.y = 23 - ((64 - 64 * scale.y) / 2);
+	}
+
+	public function smoke()
+	{
+		var emitter = new FlxEmitter(30, 30);
+		emitter.setPosition(x - 5, y + 25);
+
+		for (i in 0...10)
+		{
+			var p = new FlxParticle();
+			var sizep = Std.random(4) + 1;
+			var color = FlxColor.WHITE;
+			color.alpha = 100;
+			p.makeGraphic(sizep, sizep, color);
+			p.setSize(sizep, sizep);
+			p.exists = false;
+			emitter.add(p);
+		}
+
+		emitter.speed.start.max = 10;
+		this.stage.add(emitter);
+		this.stage.emitters.add(emitter);
+		emitter.start(true);
 	}
 
 	private function stretch()
