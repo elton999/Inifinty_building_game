@@ -17,10 +17,12 @@ import flixel.tile.FlxTilemapBuffer;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import scene.Floor;
+import ui.HUD;
 
 class PlayState extends FlxState
 {
 	public var Player:Player;
+	public var HUD:HUD;
 
 	private var floor:FlxTypedGroup<FlxTilemap>;
 	private var tilemap:FlxTypedGroup<FlxTilemap>;
@@ -60,6 +62,13 @@ class PlayState extends FlxState
 		this.bullets = new FlxTypedGroup<Bullet>();
 		add(this.bullets);
 
+		this.HUD = new HUD();
+		this.HUD.state = this;
+		add(this.HUD.timerSecondsText);
+		add(this.HUD.timerMilisecondsText);
+		add(this.HUD.currentLevelText);
+		add(this.HUD.pointsTexts);
+
 		// FlxG.camera.follow(this.Player, PLATFORMER, 1);
 
 		bgColor = FlxColor.GRAY;
@@ -71,6 +80,7 @@ class PlayState extends FlxState
 		if (canUpdate())
 		{
 			super.update(elapsed);
+			this.HUD.update(elapsed);
 		}
 		if (isFreazeEfx)
 		{
@@ -103,6 +113,14 @@ class PlayState extends FlxState
 			enemy.exists = false;
 			isFreazeEfx = true;
 			enemy.bleed(bullet.x, bullet.y);
+			HUD.points += 1;
+		});
+
+		FlxG.collide(this.Player, this.enemies, function(player:Player, enemy:Enemy)
+		{
+			var color = FlxColor.RED;
+			color.alpha = 60;
+			this.camera.flash(color, 0.5);
 		});
 	}
 

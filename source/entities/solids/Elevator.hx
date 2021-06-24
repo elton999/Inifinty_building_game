@@ -44,7 +44,7 @@ class Elevator extends FlxSprite
 			FlxTween.linearPath(this, [FlxPoint.get(x, y), FlxPoint.get(paths[goToPath].x, paths[goToPath].y)], this.speed, false, {
 				onComplete: backToOtherlevel,
 				type: ONESHOT,
-				startDelay: 2
+				startDelay: 0.5
 			});
 			_isMoving = false;
 		}

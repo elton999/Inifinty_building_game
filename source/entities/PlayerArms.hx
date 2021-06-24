@@ -31,7 +31,7 @@ class PlayerArms extends FlxSprite
 	private function setAnimations()
 	{
 		animation.add("idle", [0, 1, 2, 3, 4], 10);
-		animation.add("run", [9, 10, 11, 12, 13, 14, 15], 10);
+		animation.add("run", [9, 10, 11, 12, 13, 14, 15], 20);
 		animation.add("jump", [5]);
 	}
 

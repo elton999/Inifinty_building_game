@@ -8,8 +8,6 @@ import flixel.effects.particles.FlxParticle;
 import flixel.math.FlxPoint;
 import flixel.math.FlxVelocity;
 import flixel.util.FlxColor;
-import flixel.util.helpers.FlxRange;
-import flixel.util.helpers.FlxRangeBounds;
 
 class Enemy extends FlxSprite
 {
@@ -24,7 +22,8 @@ class Enemy extends FlxSprite
 
 	public override function update(elapsed:Float)
 	{
-		if (visible && !this.stage.isChangingFloor)
+		this.draw();
+		if (visible && this.stage.canUpdate())
 		{
 			FlxVelocity.moveTowardsObject(this, this.stage.Player, 20);
 			velocity.set(velocity.x, 200);
@@ -56,7 +55,7 @@ class Enemy extends FlxSprite
 
 		FlxG.camera.shake(0.01, 0.2);
 		var color = FlxColor.WHITE;
-		color.alpha = 100;
-		FlxG.camera.flash(color, 0.2, true);
+		color.alpha = 60;
+		FlxG.camera.flash(color, 0.5, true);
 	}
 }

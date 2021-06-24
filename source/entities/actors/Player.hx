@@ -1,6 +1,7 @@
 package entities.actors;
 
 import entities.Weapon;
+import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
@@ -155,7 +156,16 @@ class Player extends FlxSprite
 	private function deformeBody()
 	{
 		if (lastframeIsOnGround && !this.isGrounded())
+		{
 			this.stretch();
+			FlxTween.tween(camera, {"zoom": 1.02}, 0.15, {
+				onComplete: function(_)
+				{
+					FlxTween.tween(camera, {"zoom": 1}, 0.1);
+				},
+				type: ONESHOT
+			});
+		}
 		if (!lastframeIsOnGround && this.isGrounded())
 		{
 			this.smash();
@@ -235,7 +245,7 @@ class Player extends FlxSprite
 	private function setAnimation():Void
 	{
 		animation.add("idle", [0, 1, 2, 3, 4], 10);
-		animation.add("run", [9, 10, 11, 12, 13, 14, 15], 10);
+		animation.add("run", [9, 10, 11, 12, 13, 14, 15], 20);
 		animation.add("jump", [16], 10);
 	}
 
