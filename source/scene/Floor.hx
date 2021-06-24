@@ -1,11 +1,16 @@
 package scene;
 
 import entities.solids.Elevator;
+import flixel.FlxBasic;
 import flixel.FlxObject;
+import flixel.FlxSprite;
 import flixel.addons.editors.ogmo.FlxOgmo3Loader;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.group.FlxGroup;
 import flixel.tile.FlxTilemap;
+import haxe.Json;
 import lime.math.Vector2;
+import openfl.Assets;
 
 class Floor
 {
@@ -56,6 +61,7 @@ class Floor
 		this.floor.add(this.seTtileMap(x, y, "collision", pathPartOfLevel));
 		this.setEntities(x, y, pathPartOfLevel);
 		this.tilemap.add(this.seTtileMap(x, y, "texture", pathPartOfLevel));
+		this.setDecal(x, y, pathPartOfLevel);
 	}
 
 	private function seTtileMap(x:Float, y:Float, layer:String, pathPartOfLevel:String):FlxTilemap
@@ -107,16 +113,44 @@ class Floor
 			if (entity.name == "elevator")
 			{
 				var elevator:Elevator = new Elevator();
-				elevator.setPosition(entity.x + x, entity.y + y);
-				elevator.paths.push(new Vector2(entity.x + x, entity.y + y));
 
-				for (i in 0...entity.nodes.length)
-					elevator.paths.push(new Vector2(entity.nodes[i].x + x, entity.nodes[i].y + y));
+				if (Std.random(2) == 0)
+				{
+					elevator.setPosition(entity.x + x, entity.y + y);
+					elevator.paths.push(new Vector2(entity.x + x, entity.y + y));
+					elevator.paths.push(new Vector2(entity.nodes[0].x + x, entity.nodes[0].y + y));
+				}
+				else
+				{
+					elevator.setPosition(entity.nodes[0].x + x, entity.nodes[0].y + y);
+					elevator.paths.push(new Vector2(entity.nodes[0].x + x, entity.nodes[0].y + y));
+					elevator.paths.push(new Vector2(entity.x + x, entity.y + y));
+				}
 
 				elevator.stage = this.state;
 				elevators.add(elevator);
 			}
 		}, "entities");
+	}
+
+	private function setDecal(x:Float, y:Float, pathPartOfLevel:String):Void
+	{
+		var level:LevelData = Json.parse(Assets.getText(pathPartOfLevel));
+		var path = "assets/images/environments/";
+		for (layer in level.layers)
+		{
+			if (layer.name == "environments")
+			{
+				for (decal in layer.decals)
+				{
+					if (Std.random(4) == 0)
+					{
+						var environment:FlxSprite = new FlxSprite(decal.x + x, decal.y + y, path + decal.texture);
+						this.state.environments.add(environment);
+					}
+				}
+			}
+		}
 	}
 
 	public function goUp():Void

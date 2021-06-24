@@ -1,1 +1,99 @@
-{"name":"infinity building ","ogmoVersion":"3.4.0","levelPaths":["."],"backgroundColor":"#282c34ff","gridColor":"#3c4049cc","anglesRadians":true,"directoryDepth":5,"layerGridDefaultSize":{"x":8,"y":8},"levelDefaultSize":{"x":320,"y":240},"levelMinSize":{"x":24,"y":240},"levelMaxSize":{"x":4096,"y":4096},"levelValues":[],"defaultExportMode":".json","compactExport":true,"externalScript":"","playCommand":"","entityTags":[],"layers":[{"definition":"entity","name":"entities","gridSize":{"x":8,"y":8},"exportID":"20845868","requiredTags":[],"excludedTags":[]},{"definition":"tile","name":"texture","gridSize":{"x":8,"y":8},"exportID":"38741190","exportMode":0,"arrayMode":0,"defaultTileset":"collision"},{"definition":"tile","name":"collision","gridSize":{"x":8,"y":8},"exportID":"21000496","exportMode":0,"arrayMode":0,"defaultTileset":"collision"}],"entities":[{"exportID":"28559457","name":"elevator","limit":-1,"size":{"x":24,"y":8},"origin":{"x":0,"y":0},"originAnchored":true,"shape":{"label":"Rectangle","points":[{"x":-1,"y":-1},{"x":1,"y":-1},{"x":-1,"y":1},{"x":1,"y":-1},{"x":-1,"y":1},{"x":1,"y":1}]},"color":"#ff0000ff","tileX":false,"tileY":false,"tileSize":{"x":24,"y":8},"resizeableX":false,"resizeableY":false,"rotatable":false,"rotationDegrees":360,"canFlipX":false,"canFlipY":false,"canSetColor":false,"hasNodes":true,"nodeLimit":0,"nodeDisplay":0,"nodeGhost":true,"tags":[],"values":[]}],"tilesets":[{"label":"collision","path":"../images/collision_tilemap.png","image":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAYAAABV7bNHAAAAAXNSR0IArs4c6QAAA+FJREFUeJztm79rFEEUx9/JtRdIY0izmEQ9wnIohivSpVJJKjGFRTQQ/AMELURNpYYrIkQbi4gQtEihWISIXhNTpTgUj+MIIcbINZIqkLSBWM2x2duZN7/e7G2cD4TN5e3OznzznXkzs3s5QDg+GjsWxUcq54XXh+EwNJub3Pjy1BxWBetsbf0FAIBisR89N09dmWZzExWJVdg12H2LxX56gTBxAABeL76kroYWC/OV7nAQAMDQQNjxt53dJjdGHWexrnAQIwgGT3xmlUyKsThrHC+OXY/d+4xMxU1gDqIi2kiMVuu3cvnGArHGi46yDqKGuURFqBx2gkyaZyJgxySWp+bg3oOH0hWWYWggVHIWj4X5CuSvPLsrFODOCtY9NtuNjx8BOh3lAhviMMgG6ah7ZFDNYnERbGdB8iymMzirZLEkl+hkQexapw4ql0pQazSslM9zhW2cOqjWaEC5VGr/bkKSIyggmwfxMpctB7mCTCDRGJQlkbomi+3sNrnpWRQzLRuL5388eSOcLIafXgjnSSIBwnAY3t24Lyx/9s9tYflpQ75YlQWb68Tjolj8nFTmQTZTNoM3FxkaCDtiQTAIa+sr0qt5UfmimNIgzVK0aowS2bEpCAbpVvMyc5csZCad1bxWF+O5JdrtVLugSRaLx+Or+aTrsThDSSAVYVTEWZivqFTDKVJdLLpEYJ8BTna9aLxcKrV/sg66YfbqV5V0nnI9f1n72i9HP9HrL547i7ZRBMlSY3WpJn3urfePKKpgrWwSgSamy0rnU4hkq0xrAsm6hneeTZFslmVNoInpspRIInfZaJhtN1rtYljXkhHQpIEUXZX8wWEU2bFJp6FUg71TgVRQaTBlJsxdm32uPc9hjhB1na9PHxvNQ9JG20FsUF5dqimn9SyhvR8UFUZlYpg1vIMQvIMQvIMQvIMQvIMQcuOTM8J50OcPb03nMWk/9zKqfx4Af270P9Meg2SeK+kyNnIT6ttVuHThaseRx7fvHzvK4MErO16GDk6erKqKAyAWJE5S2fXtqmm1AcDRYlVVnG66hxOBqMVhnAoHZe1ezhzkmsw5SIfW3ga09jac3S8Jp2OQKkHfKAR9o87ul4TTMUgVEwdlqot5ByF4ByF4ByFk2UF5APP3kDFMHGRyPxuL1UQH2f6iSPQ/6uJo3UFJgtj61h4AfzVPfbS63UG1H9TbU0hFnPp2FXp7CrB/cGhU/9z45Mxx0ovaAABr6yvGW669PYVUt1z3Dw677xW804QXCMELhOAFQhBu2tuYD5kOkmkjdJB/Lua7GIoXCMELhOAFQvACITjZD8oy/wDVaenkpGLemQAAAABJRU5ErkJggg==","tileWidth":8,"tileHeight":8,"tileSeparationX":0,"tileSeparationY":0,"tileMarginX":0,"tileMarginY":0}]}
+{
+  "name": "infinity building ",
+  "ogmoVersion": "3.4.0",
+  "levelPaths": ["."],
+  "backgroundColor": "#282c34ff",
+  "gridColor": "#3c4049cc",
+  "anglesRadians": true,
+  "directoryDepth": 5,
+  "layerGridDefaultSize": {"x": 8, "y": 8},
+  "levelDefaultSize": {"x": 320, "y": 240},
+  "levelMinSize": {"x": 24, "y": 240},
+  "levelMaxSize": {"x": 4096, "y": 4096},
+  "levelValues": [],
+  "defaultExportMode": ".json",
+  "compactExport": false,
+  "externalScript": "",
+  "playCommand": "",
+  "entityTags": [],
+  "layers": [
+    {
+      "definition": "entity",
+      "name": "entities",
+      "gridSize": {"x": 8, "y": 8},
+      "exportID": "20845868",
+      "requiredTags": [],
+      "excludedTags": []
+    },
+    {
+      "definition": "decal",
+      "name": "environments",
+      "gridSize": {"x": 8, "y": 8},
+      "exportID": "48346852",
+      "folder": "../images/environments",
+      "includeImageSequence": false,
+      "scaleable": false,
+      "rotatable": false,
+      "values": []
+    },
+    {
+      "definition": "tile",
+      "name": "texture",
+      "gridSize": {"x": 8, "y": 8},
+      "exportID": "38741190",
+      "exportMode": 0,
+      "arrayMode": 0,
+      "defaultTileset": "collision"
+    },
+    {
+      "definition": "tile",
+      "name": "collision",
+      "gridSize": {"x": 8, "y": 8},
+      "exportID": "21000496",
+      "exportMode": 0,
+      "arrayMode": 0,
+      "defaultTileset": "collision"
+    }
+  ],
+  "entities": [
+    {
+      "exportID": "28559457",
+      "name": "elevator",
+      "limit": -1,
+      "size": {"x": 24, "y": 8},
+      "origin": {"x": 0, "y": 0},
+      "originAnchored": true,
+      "shape": {
+        "label": "Rectangle",
+        "points": [
+          {"x": -1, "y": -1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": -1},
+          {"x": -1, "y": 1},
+          {"x": 1, "y": 1}
+        ]
+      },
+      "color": "#ff0000ff",
+      "tileX": false,
+      "tileY": false,
+      "tileSize": {"x": 24, "y": 8},
+      "resizeableX": false,
+      "resizeableY": false,
+      "rotatable": false,
+      "rotationDegrees": 360,
+      "canFlipX": false,
+      "canFlipY": false,
+      "canSetColor": false,
+      "hasNodes": true,
+      "nodeLimit": 0,
+      "nodeDisplay": 0,
+      "nodeGhost": true,
+      "tags": [],
+      "values": []
+    }
+  ],
+  "tilesets": [
+    {"label": "collision", "path": "../images/collision_tilemap.png", "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAYAAABV7bNHAAAAAXNSR0IArs4c6QAABFlJREFUeJztnN9LFFEUx8/attnsJgYWtMruorvrD0pBrVBIUone/At6CoJeFIT+gf4Cw6B8iJ4C3yKFiA2sKLAo+0lsa/7AlTSwwMDd7QeBPdiV2dm5v+beOz9kPi/D7rlzZubrOffce+euAaCw/ffsNsne0P+d5oLIg1sZAACYz2VN7c0tbRXf4driQD7Qefn8zj3H43XY9vO5LDS3tEGQ60oW0ZIxKC2uYu0PM0+xtnweb2MF5wMJhWvf3AL2CEQSZz6XhbtTk3bcBjfxeJ07IggAYHZmuuK73sEhrE21HdkcjyA9na0D3Db0cKRzRexVxLMY0ZIxpqMK0F+ahTefHnH7FxYIpQ/uCMAeQapBUcIjVIDWgKXM00Qi9UHXrozB2Ph15htmoSHaBF/Wl4T9jI4MQ7D+zHGiAOlLGtWRMVL0R9E0w3WwrPCkoBnKOmmWyqWHVElEcWUVs9Lv0CqNCI5WMTPMUiqRUFfNVKFMILMIWllZhUQi5imhbI0ggB2RvIStEYTwkkiuqWKyKpYV3yR7cO3ZR+JgMZWMEcdJpPGNloxBTe7neeLdAWRIRpXCsWDLZJUF2jjIaCfZjG0cGQclEjHpfQlpxm60/VovQHU0wjybp7WRMg4ilWenSjdrCna2DqibzaOHJ0WMFyqTldm8pRTDRYs+7VhTEC2okyKBtwrNzkyXfWe090YNnzH+uRfteYThiaiJGze531SQGB0ZFvaB/nBMKYamCPrPAOWpp7ej6QRrvyRTHFmge6IumJ27epk4DhKl70CnSvdwb2qSNg4jomSq8WPhD3PbifvjKm5Bmm8lAtWmQlztVYgky6c0gVijBtdOpkgyfUkTqDYVYhKJFF0yHkx2NEpNMVpqsQgo8oAqUlXZepAZrH2TlQdV1dnbKhAPPA+sshIGTl64qHSc8+rObZXuqXT19DszDtKnC29Z9xKW14P0HS6t8+1I98Hy2hw01ndXHHG8/1y+6akj3Ydti/Nt9GEFywLpyzqtxPOKA0AWxIiZ7+W1OebzSVhOMZ4I4hXHCqquYUsfpFocxJ6IINV4NoLsRtY1g1Wr68QGb188ERpHAEBmq1gCgMrK5AWC+/aHiO+NTnT1CF3g9fPHQuc7zW6ZV7k359iROoiE6TvVZFIoluDrN7FfAQDYOBcr/E8zr13L1smqHSLJvobt7+a1UEKp/0JR7hsS1y53uAVfIAquFmhjMwsbm86+VHTN/iAzjh6u/DGd3fgRRMGPIAp+BFHwI4iCH0EUggDOb7XF4doIEv2NFgm0kKXqKJsggLkgxn1+ssC9gZB1jGhyl1WUrwfVhMNln1WK01jfXdZnHZKwBhXoHRzaNtuoDQBQHY3A79KW0JLrwoeXmbB2cPdzoaR2yUMfQYVSCdLtp923BW8v4QtEwReIgi8QBeJUoyHaBEuL74QukGo/JfpezVGIESTjvxd4HT/FKPgCUfAFouALRMEXiIKr14PcwD+u2m/s6grrhwAAAABJRU5ErkJggg==", "tileWidth": 8, "tileHeight": 8, "tileSeparationX": 0, "tileSeparationY": 0, "tileMarginX": 0, "tileMarginY": 0}
+  ]
+}

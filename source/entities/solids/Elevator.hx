@@ -12,9 +12,10 @@ class Elevator extends FlxSprite
 	public function new(x:Float = 32, y:Float = 8)
 	{
 		super(x, y);
-		makeGraphic(Std.int(x), Std.int(y), FlxColor.BLUE);
-		setSize(x, y);
+		loadGraphic(AssetPaths.elevator__png);
+		offset.y = 48;
 		this._isMoving = true;
+		setSize(x, y);
 	}
 
 	public var paths:Array<Vector2> = new Array<Vector2>();

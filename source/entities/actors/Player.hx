@@ -1,4 +1,4 @@
-package entities;
+package entities.actors;
 
 import entities.Weapon;
 import flixel.FlxG;
@@ -51,6 +51,8 @@ class Player extends FlxSprite
 			super.update(elapsed);
 			this.checkCurrentLevel();
 		}
+		else
+			velocity.set(0, 0);
 	}
 
 	public function checkCurrentLevel()

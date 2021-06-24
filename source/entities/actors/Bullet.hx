@@ -1,4 +1,4 @@
-package entities;
+package entities.actors;
 
 import flixel.FlxSprite;
 import flixel.util.FlxColor;

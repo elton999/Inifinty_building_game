@@ -1,5 +1,7 @@
 package entities;
 
+import entities.actors.Bullet;
+import entities.actors.Player;
 import flixel.FlxG;
 import flixel.FlxSprite;
 
@@ -47,8 +49,9 @@ class Weapon
 	{
 		var bullet:Bullet = new Bullet();
 		bullet.speed = !character.right ? -bullet.speed : bullet.speed;
+		var offsetX = !character.right ? -10 : 10;
 
-		bullet.setPosition(this.character.getPosition().x, this.character.getPosition().y + 5 + Std.random(5));
+		bullet.setPosition(this.character.getPosition().x + offsetX, this.character.getPosition().y + Std.random(5));
 
 		return bullet;
 	}

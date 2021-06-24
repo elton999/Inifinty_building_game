@@ -1,11 +1,14 @@
 package;
 
-import entities.Bullet;
-import entities.Player;
+import entities.actors.Bullet;
+import entities.actors.Player;
 import entities.solids.Elevator;
+import flixel.FlxBasic;
 import flixel.FlxG;
+import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.group.FlxGroup;
 import flixel.tile.FlxTilemap;
 import flixel.tile.FlxTilemapBuffer;
 import flixel.tweens.FlxTween;
@@ -22,6 +25,7 @@ class PlayState extends FlxState
 	public var floorManagement:Floor;
 
 	public var bullets:FlxTypedGroup<Bullet>;
+	public var environments:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
 	public var elevators:FlxTypedGroup<Elevator>;
 
 	public var isChangingFloor:Bool = false;
@@ -39,6 +43,7 @@ class PlayState extends FlxState
 		this.elevators = floorManagement.elevators;
 		add(this.floor);
 		add(this.tilemap);
+		add(environments);
 		add(this.elevators);
 
 		this.Player = new Player(this);

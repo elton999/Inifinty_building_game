@@ -1,5 +1,6 @@
 package entities;
 
+import entities.actors.Player;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.math.FlxPoint;
