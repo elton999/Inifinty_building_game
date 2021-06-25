@@ -12,7 +12,8 @@ class HUD
 	public var currentLevelText:FlxText;
 	public var pointsTexts:FlxText;
 	public var points:Int = 0;
-	public var lifes:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
+	public var lifes:Int = 3;
+	public var lifesText:FlxText;
 	public var state:PlayState;
 
 	public function new()
@@ -39,6 +40,12 @@ class HUD
 		pointsTexts.scrollFactor.set(0, 0);
 		pointsTexts.setPosition(0, 26);
 		pointsTexts.size = 15;
+
+		lifesText = new FlxText();
+		lifesText.font = AssetPaths.KenneyMini__ttf;
+		lifesText.scrollFactor.set(0, 0);
+		lifesText.setPosition(0, 40);
+		lifesText.size = 15;
 	}
 
 	public function update(elapsed:Float)
@@ -66,5 +73,7 @@ class HUD
 
 		currentLevelText.text = "Floor: " + Std.string(this.state.currentLevel + 1);
 		pointsTexts.text = "Points: " + Std.string(this.points);
+
+		lifesText.text = Std.string(this.lifes) + "/3";
 	}
 }

@@ -68,6 +68,7 @@ class PlayState extends FlxState
 		add(this.HUD.timerMilisecondsText);
 		add(this.HUD.currentLevelText);
 		add(this.HUD.pointsTexts);
+		add(this.HUD.lifesText);
 
 		// FlxG.camera.follow(this.Player, PLATFORMER, 1);
 
@@ -81,6 +82,7 @@ class PlayState extends FlxState
 		{
 			super.update(elapsed);
 			this.HUD.update(elapsed);
+			timerDelayDemage -= elapsed;
 		}
 		if (isFreazeEfx)
 		{
@@ -118,12 +120,19 @@ class PlayState extends FlxState
 
 		FlxG.collide(this.Player, this.enemies, function(player:Player, enemy:Enemy)
 		{
-			var color = FlxColor.RED;
-			color.alpha = 60;
-			this.camera.flash(color, 0.5);
+			if (timerDelayDemage < 0)
+			{
+				var color = FlxColor.RED;
+				color.alpha = 60;
+				this.camera.flash(color, 0.5);
+				this.HUD.lifes--;
+				timerDelayDemage = this.timerDelayDemageMax;
+			}
 		});
 	}
 
+	public var timerDelayDemage:Float = 0;
+	public var timerDelayDemageMax:Float = 2;
 	public var isChangingFloor:Bool = false;
 	public var isFreazeEfx:Bool = false;
 	public var timerFreaze:Float = 0;
