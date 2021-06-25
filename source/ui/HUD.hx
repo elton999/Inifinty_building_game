@@ -1,8 +1,10 @@
 package ui;
 
+import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
+import flixel.util.FlxColor;
 
 class HUD
 {
@@ -76,5 +78,33 @@ class HUD
 		pointsTexts.text = "Points: " + Std.string(this.points);
 
 		lifesText.text = Std.string(this.lifes) + "/3";
+
+		this.showRestartGame();
+		this.restartGame();
+	}
+
+	private var _restartGametext:FlxText;
+
+	private function showRestartGame():Void
+	{
+		if (_restartGametext == null && this.lifes <= 0)
+		{
+			_restartGametext = new FlxText();
+			_restartGametext.font = AssetPaths.KenneyMini__ttf;
+			_restartGametext.scrollFactor.set(0, 0);
+			_restartGametext.setPosition(150, 130);
+			_restartGametext.size = 15;
+			_restartGametext.color = FlxColor.WHITE;
+			_restartGametext.text = "Play again (R)";
+			this.state.add(_restartGametext);
+		}
+	}
+
+	private function restartGame():Void
+	{
+		if (_restartGametext != null && this.lifes <= 0 && FlxG.keys.anyPressed([R]))
+		{
+			FlxG.switchState(new PlayState());
+		}
 	}
 }
