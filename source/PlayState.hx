@@ -24,7 +24,8 @@ class PlayState extends FlxState
 	public var Player:Player;
 	public var HUD:HUD;
 
-	private var floor:FlxTypedGroup<FlxTilemap>;
+	public var floor:FlxTypedGroup<FlxTilemap>;
+
 	private var tilemap:FlxTypedGroup<FlxTilemap>;
 
 	public var floorManagement:Floor;
@@ -100,11 +101,11 @@ class PlayState extends FlxState
 	{
 		FlxG.collide(this.Player, this.elevators);
 		FlxG.collide(this.Player, floor);
-		FlxG.collide(this.enemies, floor);
 		FlxG.collide(this.enemies, this.enemies);
 		FlxG.collide(this.bullets, floor, function(bullet:Bullet, floor:FlxTilemap)
 		{
 			bullet.exists = false;
+			bullet.light.exists = false;
 		});
 
 		FlxG.collide(this.emitters, floor);
@@ -112,27 +113,20 @@ class PlayState extends FlxState
 		FlxG.collide(this.bullets, this.enemies, function(bullet:Bullet, enemy:Enemy)
 		{
 			bullet.exists = false;
-			enemy.exists = false;
+			bullet.light.exists = false;
 			isFreazeEfx = true;
-			enemy.bleed(bullet.x, bullet.y);
-			HUD.points += 1;
+			enemy.demage(bullet.x, bullet.y);
+			HUD.points++;
 		});
 
 		FlxG.collide(this.Player, this.enemies, function(player:Player, enemy:Enemy)
 		{
-			if (timerDelayDemage < 0)
-			{
-				var color = FlxColor.RED;
-				color.alpha = 60;
-				this.camera.flash(color, 0.5);
-				this.HUD.lifes--;
-				timerDelayDemage = this.timerDelayDemageMax;
-			}
+			this.Player.demage();
 		});
 	}
 
 	public var timerDelayDemage:Float = 0;
-	public var timerDelayDemageMax:Float = 2;
+	public var timerDelayDemageMax:Float = 1;
 	public var isChangingFloor:Bool = false;
 	public var isFreazeEfx:Bool = false;
 	public var timerFreaze:Float = 0;

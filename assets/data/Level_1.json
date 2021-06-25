@@ -15,8 +15,8 @@
       "gridCellsX": 8,
       "gridCellsY": 30,
       "entities": [
-        {"name": "enemy", "id": 0, "_eid": "50600885", "x": 48, "y": 186, "originX": 0, "originY": 0},
-        {"name": "enemy", "id": 1, "_eid": "50600885", "x": 16, "y": 66, "originX": 0, "originY": 0}
+        {"name": "enemy", "id": 0, "_eid": "50600885", "x": 48, "y": 194, "originX": 0, "originY": 0},
+        {"name": "enemy", "id": 1, "_eid": "50600885", "x": 16, "y": 74, "originX": 0, "originY": 0}
       ]
     },
     {

@@ -21,7 +21,7 @@ class HUD
 		timerSecondsText = new FlxText();
 		timerSecondsText.font = AssetPaths.KenneyMini__ttf;
 		timerSecondsText.scrollFactor.set(0, 0);
-		timerSecondsText.antialiasing = true;
+		timerSecondsText.antialiasing = false;
 		timerSecondsText.size = 12;
 
 		timerMilisecondsText = new FlxText();
@@ -50,7 +50,8 @@ class HUD
 
 	public function update(elapsed:Float)
 	{
-		timer += elapsed;
+		if (this.lifes > 0)
+			timer += elapsed;
 
 		var preNumbers = "0";
 		preNumbers = timer < 1000 ? "0" : preNumbers;

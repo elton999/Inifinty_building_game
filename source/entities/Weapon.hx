@@ -40,7 +40,9 @@ class Weapon
 
 	public function shoot()
 	{
-		this.stage.bullets.add(this.createBullet());
+		var bullet = this.createBullet();
+		this.stage.add(bullet.light);
+		this.stage.bullets.add(bullet);
 		this.timer = 0;
 		FlxG.camera.shake(0.003, 0.2);
 	}
@@ -52,7 +54,7 @@ class Weapon
 		var offsetX = !character.right ? -10 : 10;
 
 		bullet.setPosition(this.character.getPosition().x + offsetX, this.character.getPosition().y + Std.random(5));
-
+		this.stage.Player.smash();
 		return bullet;
 	}
 }

@@ -86,18 +86,21 @@ class Player extends FlxSprite
 	public function move():Void
 	{
 		var speed:Float = 0;
-		if (this.CRight)
+		if (this.stage.HUD.lifes > 0)
 		{
-			speed = this._speed;
-			right = true;
-			this.flipX = false;
-		}
+			if (this.CRight)
+			{
+				speed = this._speed;
+				right = true;
+				this.flipX = false;
+			}
 
-		if (this.CLeft)
-		{
-			speed = -this._speed;
-			right = false;
-			this.flipX = true;
+			if (this.CLeft)
+			{
+				speed = -this._speed;
+				right = false;
+				this.flipX = true;
+			}
 		}
 
 		velocity.set(speed, this._gravity);
@@ -194,6 +197,8 @@ class Player extends FlxSprite
 		}
 
 		emitter.speed.start.max = 10;
+		emitter.velocity.end.max.y = 200;
+		emitter.velocity.end.min.y = 200;
 		this.stage.add(emitter);
 		this.stage.emitters.add(emitter);
 		emitter.start(true);
@@ -210,7 +215,7 @@ class Player extends FlxSprite
 		});
 	}
 
-	private function smash()
+	public function smash()
 	{
 		FlxTween.tween(this, {"scale.x": 1.2, "scale.y": 0.9}, 0.15, {
 			onComplete: function(_)
@@ -225,20 +230,46 @@ class Player extends FlxSprite
 	// animation
 	private function playAnimation():Void
 	{
-		if (this.velocity.x != 0 && this.isGrounded())
+		if (this.stage.HUD.lifes > 0)
 		{
-			this.animation.play("run");
-			this.arms.animation.play("run");
+			if (this.velocity.x != 0 && this.isGrounded())
+			{
+				this.animation.play("run");
+				this.arms.animation.play("run");
+			}
+			else if (!this.isGrounded())
+			{
+				this.animation.play("jump");
+				this.arms.animation.play("jump");
+			}
+			else
+			{
+				this.animation.play("idle");
+				this.arms.animation.play("idle");
+			}
 		}
-		else if (!this.isGrounded())
+		else if (this.alive)
 		{
-			this.animation.play("jump");
-			this.arms.animation.play("jump");
+			this.animation.play("die");
+			this.arms.animation.play("die");
+			this.alive = false;
 		}
-		else
+	}
+
+	public function demage()
+	{
+		if (stage.timerDelayDemage < 0 && stage.HUD.lifes > 0)
 		{
-			this.animation.play("idle");
-			this.arms.animation.play("idle");
+			var color = FlxColor.RED;
+			color.alpha = Std.int((255 - (200 / 3 * stage.HUD.lifes)));
+
+			stage.HUD.lifes--;
+			if (stage.HUD.lifes <= 0)
+			{
+				stage.timerFreaze = 0.5;
+			}
+			camera.flash(color, 0.5);
+			stage.timerDelayDemage = stage.timerDelayDemageMax;
 		}
 	}
 
@@ -246,6 +277,7 @@ class Player extends FlxSprite
 	{
 		animation.add("idle", [0, 1, 2, 3, 4], 10);
 		animation.add("run", [9, 10, 11, 12, 13, 14, 15], 20);
+		animation.add("die", [17, 18, 19, 20, 21], 5, false);
 		animation.add("jump", [16], 10);
 	}
 
