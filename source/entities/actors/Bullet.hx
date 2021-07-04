@@ -7,8 +7,9 @@ import flixel.util.FlxColor;
 class Bullet extends FlxSprite
 {
 	public var light:Light;
+	public var stage:PlayState;
 
-	public function new(x:Float = 5, y:Float = 5)
+	public function new(x:Float = 10, y:Float = 5)
 	{
 		super(x, y);
 		// makeGraphic(Std.int(x), Std.int(y), FlxColor.BLUE);
@@ -30,5 +31,21 @@ class Bullet extends FlxSprite
 		light.setPosition(x - 200, y - 200);
 		light.exists = this.exists;
 		super.update(elapsed);
+	}
+
+	public function destroyBullet()
+	{
+		var explosionEFX = new FlxSprite();
+		explosionEFX.setPosition(x - 16, y - 16);
+		explosionEFX.setSize(32, 32);
+		explosionEFX.loadGraphic(AssetPaths.bullet_explosions__png, true, 32, 32);
+		explosionEFX.animation.add("explosion", [0, 1, 2, 3, 4], 60, false);
+		explosionEFX.animation.play("explosion", true);
+		explosionEFX.animation.finishCallback = function(_)
+		{
+			explosionEFX.exists = false;
+		}
+		this.stage.add(explosionEFX);
+		exists = false;
 	}
 }

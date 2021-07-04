@@ -104,7 +104,7 @@ class PlayState extends FlxState
 		FlxG.collide(this.enemies, this.enemies);
 		FlxG.collide(this.bullets, floor, function(bullet:Bullet, floor:FlxTilemap)
 		{
-			bullet.exists = false;
+			bullet.destroyBullet();
 			bullet.light.exists = false;
 		});
 
@@ -112,7 +112,7 @@ class PlayState extends FlxState
 
 		FlxG.collide(this.bullets, this.enemies, function(bullet:Bullet, enemy:Enemy)
 		{
-			bullet.exists = false;
+			bullet.destroyBullet();
 			bullet.light.exists = false;
 			isFreazeEfx = true;
 			enemy.demage(bullet.x, bullet.y);

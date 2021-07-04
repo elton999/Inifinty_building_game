@@ -41,6 +41,7 @@ class Weapon
 	public function shoot()
 	{
 		var bullet = this.createBullet();
+		bullet.stage = this.stage;
 		this.stage.add(bullet.light);
 		this.stage.bullets.add(bullet);
 		this.timer = 0;
@@ -50,6 +51,7 @@ class Weapon
 	private function createBullet():Bullet
 	{
 		var bullet:Bullet = new Bullet();
+		bullet.flipX = character.flipX;
 		bullet.speed = !character.right ? -bullet.speed : bullet.speed;
 		var offsetX = !character.right ? -10 : 10;
 
