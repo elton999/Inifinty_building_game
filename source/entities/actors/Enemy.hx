@@ -15,8 +15,11 @@ class Enemy extends FlxSprite
 	public function new()
 	{
 		super();
-		makeGraphic(10, 30, FlxColor.RED);
+		// makeGraphic(10, 30, FlxColor.RED);
+		loadGraphic(AssetPaths.enemy__png, true, 64, 64);
+		offset = FlxPoint.get(28, 18);
 		setSize(10, 30);
+		this.setAnimation();
 	}
 
 	public var stage:PlayState;
@@ -35,8 +38,15 @@ class Enemy extends FlxSprite
 			FlxVelocity.moveTowardsObject(this, this.stage.Player, 20);
 			velocity.set(velocity.x, 200);
 
-			offset.y = ((30 - 30 * scale.y) / 2);
+			offset.y = ((30 - 30 * scale.y) / 2) + 18;
 		}
+
+		if (velocity.x == 0)
+			this.animation.play("idle");
+		else
+			this.animation.play("walk");
+
+		this.flipX = velocity.x > 0 ? false : true;
 	}
 
 	public function demage(pointX:Float = 0, pointY:Float = 0)
@@ -65,6 +75,7 @@ class Enemy extends FlxSprite
 			p.exists = false;
 			emitter.add(p);
 		}
+
 		emitter.allowCollisions = FlxObject.ANY;
 		emitter.acceleration.start.min.y = 50;
 		emitter.acceleration.start.max.y = 100;
@@ -78,5 +89,11 @@ class Enemy extends FlxSprite
 		var color = FlxColor.WHITE;
 		color.alpha = 60;
 		FlxG.camera.flash(color, 0.5, true);
+	}
+
+	public function setAnimation():Void
+	{
+		this.animation.add("idle", [0, 1, 2, 3], 5);
+		this.animation.add("walk", [4, 5, 6, 7], 10);
 	}
 }

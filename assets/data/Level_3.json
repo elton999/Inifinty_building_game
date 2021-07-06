@@ -25,7 +25,9 @@
       "gridCellHeight": 8,
       "gridCellsX": 8,
       "gridCellsY": 30,
-      "decals": [],
+      "decals": [
+        {"x": 48, "y": 62, "texture": "item.png", "originX": 0, "originY": 0}
+      ],
       "folder": "../images/environments"
     },
     {

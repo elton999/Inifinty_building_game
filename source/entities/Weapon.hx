@@ -21,7 +21,7 @@ class Weapon
 		this.fireCadence(elapsed);
 	}
 
-	var CFire:Bool = false;
+	public var CFire:Bool = false;
 
 	private function input():Void
 	{

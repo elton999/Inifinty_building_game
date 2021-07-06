@@ -244,8 +244,16 @@ class Player extends FlxSprite
 			}
 			else
 			{
-				this.animation.play("idle");
-				this.arms.animation.play("idle");
+				if (this._weapon.CFire)
+				{
+					this.animation.play("idle-fire");
+					this.arms.animation.play("idle-fire");
+				}
+				else
+				{
+					this.animation.play("idle");
+					this.arms.animation.play("idle");
+				}
 			}
 		}
 		else if (this.alive)
@@ -279,6 +287,7 @@ class Player extends FlxSprite
 		animation.add("run", [9, 10, 11, 12, 13, 14, 15], 20);
 		animation.add("die", [17, 18, 19, 20, 21], 5, false);
 		animation.add("jump", [16], 10);
+		animation.add("idle-fire", [6], false);
 	}
 
 	// and animation

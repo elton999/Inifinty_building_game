@@ -21,7 +21,7 @@ class Floor
 	public var AllFloors:Array<Array<Int>> = new Array<Array<Int>>();
 	public var state:PlayState;
 
-	var offsetX:Int = 24;
+	var offsetX:Int = 28;
 
 	private var level:Array<String> = [
 		AssetPaths.Level_1__json,
@@ -55,6 +55,17 @@ class Floor
 			this.setPartOfFloor(offsetX + 24 + (i * 64), offsetY, level[levels[i]]);
 
 		this.setPartOfFloor(offsetX + 24 + (4 * 80), offsetY, AssetPaths.Wall_r__json);
+
+		this.setLadders(offsetX + 48 + (4 * 80), offsetY);
+		this.setLadders(offsetX - 30, offsetY);
+	}
+
+	public function setLadders(x:Float, y:Float)
+	{
+		var ladder = new FlxSprite();
+		ladder.loadGraphic(AssetPaths.out_side_build__png);
+		ladder.setPosition(x, y);
+		this.state.environments.add(ladder);
 	}
 
 	private function setPartOfFloor(x:Float, y:Float, pathPartOfLevel:String):Void
