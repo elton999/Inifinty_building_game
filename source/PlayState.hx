@@ -145,6 +145,7 @@ class PlayState extends FlxState
 				this.isChangingFloor = false;
 			}
 		});
+		this.emitters.exists = false;
 	}
 
 	public function moveUpCamera():Void

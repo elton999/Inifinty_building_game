@@ -45,7 +45,7 @@ class Enemy extends FlxSprite
 		else
 			this.animation.play("walk");
 
-		this.flipX = velocity.x > 0 ? false : true;
+		this.flipX = velocity.x < 0;
 
 		super.update(elapsed);
 		FlxG.collide(this, this.stage.floor);
@@ -84,7 +84,6 @@ class Enemy extends FlxSprite
 		emitter.acceleration.start.max.y = 100;
 		emitter.acceleration.end.min.y = 50;
 		emitter.acceleration.end.max.y = 100;
-		this.stage.add(emitter);
 		this.stage.emitters.add(emitter);
 		emitter.start(true, 5, 20);
 

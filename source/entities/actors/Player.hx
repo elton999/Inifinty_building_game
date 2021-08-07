@@ -186,20 +186,19 @@ class Player extends FlxSprite
 
 		for (i in 0...10)
 		{
-			var p = new FlxParticle();
+			var particle = new FlxParticle();
 			var sizep = Std.random(4) + 1;
 			var color = FlxColor.WHITE;
 			color.alpha = 100;
-			p.makeGraphic(sizep, sizep, color);
-			p.setSize(sizep, sizep);
-			p.exists = false;
-			emitter.add(p);
+			particle.makeGraphic(sizep, sizep, color);
+			particle.setSize(sizep, sizep);
+			particle.exists = false;
+			emitter.add(particle);
 		}
 
 		emitter.speed.start.max = 10;
 		emitter.velocity.end.max.y = 200;
 		emitter.velocity.end.min.y = 200;
-		this.stage.add(emitter);
 		this.stage.emitters.add(emitter);
 		emitter.start(true);
 	}
